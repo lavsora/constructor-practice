@@ -7,42 +7,48 @@ const DomElement = function (selector, height, width, bg, fontSize) {
     this.bg = bg
     this.fontSize = fontSize
     this.createElement = function () {
-        if (this.selector.startsWith('.', 0)) {
-            const div = document.createElement('div')
+            const square = document.createElement('div')
 
-            div.classList.add(`${this.selector.substr(1)}`)
+            square.classList.add(`${this.selector}`)
 
-            div.style.height = `${this.height}px`
-            div.style.width = `${this.width}px`
-            div.style.background = `${this.bg}`
-            div.style.fontSize = `${this.fontSize}px`
+            square.style.position = `absolute`
+            square.style.height = `${this.height}px`
+            square.style.width = `${this.width}px`
+            square.style.background = `${this.bg}`
 
-            div.textContent = 'Hello, I`m block'
-
-            document.body.insertAdjacentElement('afterbegin', div)
-
-        } else if (this.selector.startsWith('#', 0)) {
-            const p = document.createElement('p')
-
-            p.id = `${this.selector.substr(1)}`
-
-            p.style.height = `${this.height}px`
-            p.style.width = `${this.width}px`
-            p.style.background = `${this.bg}`
-            p.style.fontSize = `${this.fontSize}px`
-
-            p.textContent = 'Hello, I`m paragraph'
-
-            document.body.insertAdjacentElement('beforeend', p)
-        }
+            document.body.insertAdjacentElement('afterbegin', square)
     }
 }
 
-const newDiv = new DomElement('.block', 100, 200, 'gray', 30);
-const newP = new DomElement('#block', 200, 400, 'yellow', 30);
+document.addEventListener('DOMContentLoaded', (() => {
+    const newSquare = new DomElement('square', 100, 100, 'green', 0);
 
-newDiv.createElement()
-newP.createElement()
+    newSquare.createElement();
+
+    const squareElement = document.querySelector('.square')
+
+    const arrowKey = (event) => {
+        if (event.keyCode === 38) {
+            const up = squareElement.offsetTop;
+            squareElement.style.top = up - 10 + 'px';
+        }
+        if (event.keyCode === 40) {
+            const down = squareElement.offsetTop;
+            squareElement.style.top = down + 10 + 'px';
+        }
+        if (event.keyCode === 39) {
+            const right = squareElement.offsetLeft;
+            squareElement.style.left = right + 10 + 'px';
+        }
+        if (event.keyCode === 37) {
+            const left = squareElement.offsetLeft;
+            squareElement.style.left = left - 10 + 'px';
+        }
+    }
+
+    window.addEventListener('keydown', arrowKey)
+}))
+
 
 
 
