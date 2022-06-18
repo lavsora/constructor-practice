@@ -1,6 +1,8 @@
 'use strict'
 
 const DomElement = function (selector, height, width, bg, fontSize) {
+    let newElement;
+
     this.selector = selector
     this.height = height
     this.width = width
