@@ -67,9 +67,6 @@ const DomElement = function (selector, height, width, bg, fontSize, position) {
             rightLeft = 0
             newElement.style.left = rightLeft + 'px'
         }
-
-        console.log(rightLeft)
-        
     }
 }
 
