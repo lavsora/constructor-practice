@@ -34,8 +34,10 @@ const DomElement = function (selector, height, width, bg, fontSize, position) {
         document.body.insertAdjacentElement('afterbegin', newElement)
     }
     this.arrowKey = function (event) {
-        const upDown = newElement.offsetTop;
-        const rightLeft = newElement.offsetLeft;
+        let upDown = newElement.offsetTop;
+        let rightLeft = newElement.offsetLeft;
+
+        document.body.style.overflow = 'hidden';
 
         if (event.keyCode === 38) {
             newElement.style.top = upDown - 10 + 'px';
@@ -49,6 +51,25 @@ const DomElement = function (selector, height, width, bg, fontSize, position) {
         if (event.keyCode === 37) {
             newElement.style.left = rightLeft - 10 + 'px';
         }
+
+        if (upDown <= -90) {
+            upDown = 660
+            newElement.style.top = upDown + 'px'
+        } else if (upDown >= 750){
+            upDown = 0
+            newElement.style.top = upDown + 'px'
+        }
+
+        if (rightLeft <= -90) {
+            rightLeft = 1440
+            newElement.style.left = rightLeft + 'px'
+        } else if (rightLeft >= 1530){
+            rightLeft = 0
+            newElement.style.left = rightLeft + 'px'
+        }
+
+        console.log(rightLeft)
+        
     }
 }
 
