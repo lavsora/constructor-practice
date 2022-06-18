@@ -1,6 +1,8 @@
 'use strict'
 
 const DomElement = function (selector, height, width, bg, fontSize) {
+    let newElement;
+
     this.selector = selector
     this.height = height
     this.width = width
@@ -8,33 +10,26 @@ const DomElement = function (selector, height, width, bg, fontSize) {
     this.fontSize = fontSize
     this.createElement = function () {
         if (this.selector.startsWith('.', 0)) {
-            const div = document.createElement('div')
+            newElement = document.createElement('div')
 
-            div.classList.add(`${this.selector.substr(1)}`)
+            newElement.classList.add(`${this.selector.substr(1)}`)
 
-            div.style.height = `${this.height}px`
-            div.style.width = `${this.width}px`
-            div.style.background = `${this.bg}`
-            div.style.fontSize = `${this.fontSize}px`
-
-            div.textContent = 'Hello, I`m block'
-
-            document.body.insertAdjacentElement('afterbegin', div)
+            newElement.textContent = 'Hello, I`m block'
 
         } else if (this.selector.startsWith('#', 0)) {
-            const p = document.createElement('p')
+            newElement = document.createElement('p')
 
-            p.id = `${this.selector.substr(1)}`
+            newElement.id = `${this.selector.substr(1)}`
 
-            p.style.height = `${this.height}px`
-            p.style.width = `${this.width}px`
-            p.style.background = `${this.bg}`
-            p.style.fontSize = `${this.fontSize}px`
-
-            p.textContent = 'Hello, I`m paragraph'
-
-            document.body.insertAdjacentElement('beforeend', p)
+            newElement.textContent = 'Hello, I`m paragraph'
         }
+
+        newElement.style.height = `${this.height}px`
+        newElement.style.width = `${this.width}px`
+        newElement.style.background = `${this.bg}`
+        newElement.style.fontSize = `${this.fontSize}px`
+
+        document.body.insertAdjacentElement('afterbegin', newElement)
     }
 }
 
