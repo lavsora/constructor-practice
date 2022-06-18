@@ -9,16 +9,27 @@ const DomElement = function (selector, height, width, bg, fontSize) {
     this.bg = bg
     this.fontSize = fontSize
     this.createElement = function () {
-            const square = document.createElement('div')
+        if (this.selector.startsWith('.', 0)) {
+            newElement = document.createElement('div')
 
-            square.classList.add(`${this.selector}`)
+            newElement.classList.add(`${this.selector.substr(1)}`)
 
-            square.style.position = `absolute`
-            square.style.height = `${this.height}px`
-            square.style.width = `${this.width}px`
-            square.style.background = `${this.bg}`
+            newElement.textContent = 'Hello, I`m block'
 
-            document.body.insertAdjacentElement('afterbegin', square)
+        } else if (this.selector.startsWith('#', 0)) {
+            newElement = document.createElement('p')
+
+            newElement.id = `${this.selector.substr(1)}`
+
+            newElement.textContent = 'Hello, I`m paragraph'
+        }
+
+        newElement.style.height = `${this.height}px`
+        newElement.style.width = `${this.width}px`
+        newElement.style.background = `${this.bg}`
+        newElement.style.fontSize = `${this.fontSize}px`
+
+        document.body.insertAdjacentElement('afterbegin', newElement)
     }
 }
 
@@ -50,7 +61,6 @@ document.addEventListener('DOMContentLoaded', (() => {
 
     window.addEventListener('keydown', arrowKey)
 }))
-
 
 
 
